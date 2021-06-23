@@ -4,6 +4,11 @@
 * PySlurm
 * tabulate
 
+# Installation
+```bash
+$ python3 -m pip install batchgen
+```
+
 # Usage
 I am going to generate a **batch** script that perform the following:
 * Compile a hybrid algorithm (OMP + MPI) called `btree.c` using `MPICH` package which was installed using `spack`
