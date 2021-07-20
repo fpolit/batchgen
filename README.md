@@ -24,15 +24,15 @@ I am going to generate a **batch** script that perform the following:
 
 ### Configuring SBATCH options
 
-![sbatch options](https://github.com/fpolit/batchgen/blob/main/docs/sbatch_options.png)
+![sbatch options](./docs/sbatch_options.png)
 
 
 ### Configuring enviroment and adding job
 
-![enviroment and job](https://github.com/fpolit/batchgen/blob/main/docs/load_modules_and_job.png)
+![enviroment and job](./docs/load_modules_and_job.png)
 
 ### Generating batch script
 
-![generating batch script](https://github.com/fpolit/batchgen/blob/main/docs/generating_batch_script.png)
+![generating batch script](./docs/generating_batch_script.png)
 
-![batch script](https://github.com/fpolit/batchgen/blob/main/docs/batch_script.png)
+![batch script](./docs/batch_script.png)
