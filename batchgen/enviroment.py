@@ -9,10 +9,10 @@ from typing import List
 class SbatchEnviroment:
 	ENV_MODULE_SYSTEMS = ['spack', 'lmod']
 
-	def __init__(self, modules:List[str] = [], variables:List[dict] = {}):
+	def __init__(self, modules:List[str] = [], variables:List[dict] = {}, env_module_system:str ='spack'):
 
 		self.enviroment = {'pre_load':[], 'modules': {}, 'variables': {}}
-		self.load_modules(modules)
+		self.load_modules(modules, env_module_system)
 		self.define_variables(variables)
 
 	def pre_modules_load(self, cmd:str):

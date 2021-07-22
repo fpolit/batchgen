@@ -8,8 +8,8 @@ import os
 from typing import List
 
 class Job:
-	def __init__(self, jobs:List[str] = []):
-		self.jobs = jobs
+	def __init__(self):
+		self.jobs = []
 
 	def add_job(self, job:str):
 		self.jobs.append(job)
