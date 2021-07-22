@@ -16,25 +16,28 @@ class BatchGenerator:
     """
     This class use sbatch options , enviroment and job to generate a batch script
     """
-    def __init__(self, 
-                    sbatch_options: List[SbatchOption] = [],
-                    modules:List[str] = [], variables:List[dict] = {}, 
-					env_module_system:str = 'spack',
-                    jobs: List[str] = []):
-        self.sbatch_options = sbatch_options
-        self.enviroment = SbatchEnviroment(modules,variables, env_module_system)
-        self.jobs = Job(jobs)
-    
+    def __init__(self):
+        #import pdb; pdb.set_trace()
+        self.sbatch_options = []
+        self.enviroment = SbatchEnviroment()
+        self.jobs = Job()
+
     def add_sbatch_option(self, name:str, value:Any):
         option = SbatchOption(name, value)
         self.sbatch_options.append(option)
         print(f"Added SBATCH option: {option}")
+        
+        if option.name == 'cpus-per-task' and option.value > 1:
+        	self.enviroment.pre_modules_load('export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK')
 
     def add_sbatch_options(self, sbatch_options:dict[str, Any]):
         for name, value in sbatch_options.items():
             option = SbatchOption(name, value)
             self.sbatch_options.append(option)
             print(f"Added SBATCH option: {option}")
+            
+			if option.name == 'cpus-per-task' and option.value > 1:
+        		self.enviroment.pre_modules_load('export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK')
 
     def show_sbatch_options(self):
         sbatch_options = [[option.name, option.value_struct, option.choices]

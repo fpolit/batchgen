@@ -9,13 +9,7 @@ from typing import List
 class SbatchEnviroment:
 	ENV_MODULE_SYSTEMS = ['spack', 'lmod']
 
-	def __init__(self, modules:List[str] = [], variables:List[dict] = {}, 
-					env_module_system:str = 'spack'):
-
-		if env_module_system not in SbatchEnviroment.ENV_MODULE_SYSTEMS:
-			raise Exception(f"Unsupported enviroment module system: {env_module_system}")
-
-		self.env_module_system = env_module_system
+	def __init__(self, modules:List[str] = [], variables:List[dict] = {}):
 
 		self.enviroment = {'pre_load':[], 'modules': {}, 'variables': {}}
 		self.load_modules(modules)
@@ -31,12 +25,15 @@ class SbatchEnviroment:
 		else:
 			raise Exception(f"No {module} module was loaded")
 
-	def load_modules(self, modules:List[str]):
-		if self.env_module_system == 'spack':
+	def load_modules(self, modules:List[str], env_module_system):
+		if env_module_system not in SbatchEnviroment.ENV_MODULE_SYSTEMS:
+			raise Exception(f"Unsupported enviroment module system: {env_module_system}")	
+		
+		if env_module_system == 'spack':
 			for module in modules:
 				self.enviroment["modules"][module] = f"spack load {module}"
 				print(f"Module {module} was load")
-		else:
+		elif env_module_system == 'lmod':
 			for module in modules:
 				self.enviroment["modules"][module] = f"module load {module}"
 				print(f"Module {module} was load")
